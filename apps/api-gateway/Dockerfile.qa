@@ -1,0 +1,49 @@
+# apps/api-gateway/Dockerfile.qa
+
+# --- Etapa de Builder ---
+FROM node:20-alpine AS builder
+WORKDIR /usr/src/app
+COPY package*.json ./
+
+# Para QA, podríamos considerar instalar solo dependencias de producción
+# si no se van a correr tests que necesiten devDependencies dentro de esta imagen.
+# Si QA necesita correr tests que usan devDependencies, entonces 'npm ci' está bien.
+# Por consistencia con lo que mencionaste para prod, y para una imagen más ligera:
+RUN npm ci --only=production
+# Si necesitas devDependencies para algún paso de build o test en QA:
+# RUN npm ci
+
+COPY . .
+# El build debe ser específico para api-gateway
+# NODE_ENV=qa es útil si tu proceso de build tiene lógica condicional
+# aunque 'nest build' principalmente transpila TypeScript.
+RUN NODE_ENV=qa npm run build:api-gateway
+
+
+# --- Etapa de Producción para QA ---
+FROM node:20-alpine
+WORKDIR /app
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Copiar artefactos del build y node_modules de producción desde la etapa builder
+# Asegúrate que la ruta de 'dist/apps/api-gateway' es correcta según tu tsconfig outDir
+COPY --from=builder --chown=appuser:appgroup /usr/src/app/dist/apps/api-gateway ./dist/apps/api-gateway
+COPY --from=builder --chown=appuser:appgroup /usr/src/app/node_modules ./node_modules
+COPY --chown=appuser:appgroup package.json ./ # Solo package.json para metadatos, no package-lock.json
+
+USER appuser
+
+ENV NODE_ENV=qa
+# El puerto debe ser una variable que la aplicación lee, no hardcodeado aquí si es posible
+# GATEWAY_PORT será leído desde el .env.qa montado o inyectado
+# EXPOSE solo documenta el puerto, no lo establece. La app debe escuchar en este puerto.
+EXPOSE ${GATEWAY_PORT:-8080}
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:${GATEWAY_PORT:-8080}/health || exit 1
+
+# Ejecutar usando el script start:qa:api-gateway que a su vez llama a 'nest start'
+# o directamente el main.js compilado.
+# Para QA, es mejor ejecutar el build compilado directamente como en producción.
+CMD ["node", "dist/apps/api-gateway/main.js"] # Asegúrate que la ruta del main.js es correcta

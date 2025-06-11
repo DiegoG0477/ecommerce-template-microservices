@@ -1,0 +1,33 @@
+{
+  "scripts": {
+    "start:dev": "NODE_ENV=dev nest start --watch api-gateway",
+    "start:qa": "NODE_ENV=qa nest start api-gateway",
+    "start:prod": "NODE_ENV=prod node dist/apps/api-gateway/main",
+    "build": "nest build api-gateway",
+    "build:prod": "NODE_ENV=prod nest build api-gateway"
+  },
+  "dependencies": {
+    "@nestjs/axios": "^4.0.0",
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/core": "^11.1.1",
+    "@nestjs/passport": "^11.0.5",
+    "@nestjs/platform-express": "^11.1.1",
+    "@nestjs/swagger": "^11.2.0",
+    "@nestjs/testing": "^11.1.1",
+    "axios": "^1.9.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "express": "^5.1.0",
+    "jest": "^29.7.0",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "supertest": "^7.1.1",
+    "ts-jest": "^29.3.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.19",
+    "@types/passport-jwt": "^4.0.1"
+  }
+}

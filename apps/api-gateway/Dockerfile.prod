@@ -1,0 +1,33 @@
+# apps/api-gateway/Dockerfile.prod
+
+# --- Etapa de Builder ---
+FROM node:20-alpine AS builder
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+# NODE_ENV=prod es útil si tu proceso de build tiene lógica condicional
+RUN NODE_ENV=prod npm run build:prod:api-gateway # Usando el script build:prod
+
+
+# --- Etapa de Producción Final ---
+FROM node:20-alpine
+WORKDIR /app
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+COPY --from=builder --chown=appuser:appgroup /usr/src/app/dist/apps/api-gateway ./dist/apps/api-gateway
+COPY --from=builder --chown=appuser:appgroup /usr/src/app/node_modules ./node_modules
+COPY --chown=appuser:appgroup package.json ./
+
+USER appuser
+
+ENV NODE_ENV=production
+# EXPOSE solo documenta el puerto. La aplicación leerá GATEWAY_PORT del entorno.
+EXPOSE ${GATEWAY_PORT:-8080}
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:${GATEWAY_PORT:-8080}/health || exit 1
+
+# Ejecutar directamente el archivo main.js compilado
+CMD ["node", "dist/apps/api-gateway/main.js"] # Asegúrate que la ruta del main.js es correcta

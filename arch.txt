@@ -1,0 +1,101 @@
+<tu-proyecto-monorepo>/
+├── apps/                             # Contenedor de todas las aplicaciones/servicios
+│   ├── auth-service/                 # Microservicio de Autenticación
+│   │   ├── src/
+│   │   │   ├── common/               # Pipes, filtros, guards, DTOs compartidos DENTRO de auth-service
+│   │   │   │   ├── filters/
+│   │   │   │   ├── guards/           # ej. JwtAuthGuard (aunque podría ser global o en libs)
+│   │   │   │   └── pipes/
+│   │   │   ├── config/               # Módulo de configuración específico para auth-service
+│   │   │   │   └── configuration.ts
+│   │   │   ├── modules/
+│   │   │   │   └── auth/             # Feature principal: autenticación, tokens, etc.
+│   │   │   │       ├── dto/
+│   │   │   │       ├── strategies/   # ej. JwtStrategy, LocalStrategy
+│   │   │   │       ├── auth.controller.ts
+│   │   │   │       ├── auth.service.ts
+│   │   │   │       └── auth.module.ts
+│   │   │   ├── database/             # Configuración de DB para auth-service (si es diferente a otras)
+│   │   │   │   └── database.module.ts
+│   │   │   ├── main.ts               # Punto de entrada de auth-service
+│   │   │   └── app.module.ts         # Módulo raíz de auth-service
+│   │   ├── test/                     # E2E y unit tests para auth-service
+│   │   ├── Dockerfile                # Dockerfile para construir la imagen de auth-service
+│   │   ├── .env.dev                  # Variables para auth-service en Dev
+│   │   ├── .env.qa                   # Variables para auth-service en QA
+│   │   ├── .env.prod                 # Variables para auth-service en Prod
+│   │   └── nest-cli.json             # Configuración específica del CLI para este app (si es necesario)
+│   │
+│   ├── registration-service/         # Microservicio de Registro
+│   │   ├── src/
+│   │   │   ├── common/
+│   │   │   ├── config/
+│   │   │   │   └── configuration.ts
+│   │   │   ├── modules/
+│   │   │   │   └── registration/     # Feature principal: registro de usuarios
+│   │   │   │       ├── dto/
+│   │   │   │       ├── entities/     # Entidad User (podría estar en libs/ si es compartida)
+│   │   │   │       ├── registration.controller.ts
+│   │   │   │       ├── registration.service.ts
+│   │   │   │       └── registration.module.ts
+│   │   │   ├── database/             # Configuración de DB para registration-service
+│   │   │   │   └── database.module.ts
+│   │   │   ├── main.ts               # Punto de entrada de registration-service
+│   │   │   └── app.module.ts         # Módulo raíz de registration-service
+│   │   ├── test/
+│   │   ├── Dockerfile                # Dockerfile para construir la imagen de registration-service
+│   │   ├── .env.dev
+│   │   ├── .env.qa
+│   │   ├── .env.prod
+│   │   └── nest-cli.json
+│   │
+│   └── api-gateway/                  # (Opcional, si decides implementarlo también con NestJS)
+│       ├── src/
+│       │   ├── main.ts
+│       │   └── app.module.ts
+│       ├── test/
+│       ├── Dockerfile
+│       ├── .env.dev
+│       ├── .env.qa
+│       └── .env.prod
+│
+├── libs/                             # Librerías compartidas entre los servicios
+│   ├── common/                       # Utilidades, DTOs, interfaces, decoradores comunes a TODOS los servicios
+│   │   ├── src/
+│   │   │   ├── dto/                  # ej. UserDto (si se usa en múltiples servicios)
+│   │   │   ├── interfaces/           # ej. TokenPayload
+│   │   │   ├── constants/
+│   │   │   └── index.ts              # Para exportar todo desde la librería
+│   │   └── package.json              # Define esta librería
+│   │
+│   ├── database/                     # Configuración de base de datos compartida (si aplica)
+│   │   ├── src/
+│   │   │   ├── entities/             # Entidades compartidas (ej. User)
+│   │   │   ├── shared-database.module.ts # Módulo TypeORM/Prisma compartido
+│   │   │   └── index.ts
+│   │   └── package.json
+│   │
+│   └── config/                       # Lógica de configuración compartida (si hay patrones comunes)
+│       ├── src/
+│       │   └── shared-config.module.ts
+│       │   └── index.ts
+│       └── package.json
+│
+├── .github/                          # (Opcional) Workflows de GitHub Actions para CI/CD
+│   └── workflows/
+│       └── main.yml
+├── jenkins/                          # (Opcional) Jenkinsfiles y scripts de Jenkins
+│   ├── Jenkinsfile.auth
+│   ├── Jenkinsfile.registration
+│   └── Jenkinsfile.gateway           # (si aplica)
+│
+├── .dockerignore
+├── .eslintrc.js
+├── .gitignore
+├── .prettierrc.js
+├── docker-compose.yml                # Orquesta servicios locales para desarrollo (DB, auth, registration, gateway)
+├── nest-cli.json                     # Configuración global del CLI para el monorepo
+├── package.json                      # Un único package.json para todo el monorepo
+├── tsconfig.base.json                # Configuración base de TypeScript (NestJS CLI lo crea)
+├── tsconfig.json                     # Extiende tsconfig.base.json
+└── README.md
