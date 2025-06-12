@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REPO_URL = 'https://github.com/monocoto3000/ecommerce-template-microservices.git' // Assuming this is the monorepo URL
+        REPO_URL = 'https://github.com/DiegoG0477/ecommerce-template-microservices.git' // Assuming this is the monorepo URL
         SSH_CRED_ID = 'ssh-key-ec2'
         EC2_USER = 'ubuntu'
         // Base remote path for the monorepo
