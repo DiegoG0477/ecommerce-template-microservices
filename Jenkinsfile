@@ -107,6 +107,27 @@ pipeline {
                         creds.add(string(credentialsId: 'api-gateway-prod-secret-jwt', variable: 'SECRET_JWT'))
                         creds.add(string(credentialsId: 'api-gateway-prod-db-database', variable: 'DB_DATABASE'))
                         creds.add(string(credentialsId: 'api-gateway-prod-db-name', variable: 'DB_NAME'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-gateway-port', variable: 'GATEWAY_PORT'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-jwt-secret', variable: 'JWT_SECRET'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-jwt-expiration-time', variable: 'JWT_EXPIRATION_TIME'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-user-service-url', variable: 'USER_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-user-service-base-path', variable: 'USER_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-product-service-url', variable: 'PRODUCT_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-product-service-base-path', variable: 'PRODUCT_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-cart-service-url', variable: 'CART_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-cart-service-base-path', variable: 'CART_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-stock-service-url', variable: 'STOCK_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-stock-service-base-path', variable: 'STOCK_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-order-service-url', variable: 'ORDER_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-order-service-base-path', variable: 'ORDER_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-user-service-api-key', variable: 'USER_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-product-service-api-key', variable: 'PRODUCT_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-cart-service-api-key', variable: 'CART_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-stock-service-api-key', variable: 'STOCK_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-order-service-api-key', variable: 'ORDER_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-swagger-gateway-server-url', variable: 'SWAGGER_GATEWAY_SERVER_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-http-timeout', variable: 'HTTP_TIMEOUT'))
+                        creds.add(string(credentialsId: 'api-gateway-prod-http-max-redirects', variable: 'HTTP_MAX_REDIRECTS'))
                     } else if (env.DEPLOY_ENV == 'development') {
                         creds.add(string(credentialsId: 'api-gateway-dev-port', variable: 'APP_PORT'))
                         creds.add(string(credentialsId: 'api-gateway-dev-db-host', variable: 'DB_HOST'))
@@ -116,6 +137,27 @@ pipeline {
                         creds.add(string(credentialsId: 'api-gateway-dev-secret-jwt', variable: 'SECRET_JWT'))
                         creds.add(string(credentialsId: 'api-gateway-dev-db-database', variable: 'DB_DATABASE'))
                         creds.add(string(credentialsId: 'api-gateway-dev-db-name', variable: 'DB_NAME'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-gateway-port', variable: 'GATEWAY_PORT'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-jwt-secret', variable: 'JWT_SECRET'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-jwt-expiration-time', variable: 'JWT_EXPIRATION_TIME'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-user-service-url', variable: 'USER_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-user-service-base-path', variable: 'USER_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-product-service-url', variable: 'PRODUCT_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-product-service-base-path', variable: 'PRODUCT_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-cart-service-url', variable: 'CART_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-cart-service-base-path', variable: 'CART_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-stock-service-url', variable: 'STOCK_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-stock-service-base-path', variable: 'STOCK_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-order-service-url', variable: 'ORDER_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-order-service-base-path', variable: 'ORDER_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-user-service-api-key', variable: 'USER_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-product-service-api-key', variable: 'PRODUCT_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-cart-service-api-key', variable: 'CART_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-stock-service-api-key', variable: 'STOCK_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-order-service-api-key', variable: 'ORDER_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-swagger-gateway-server-url', variable: 'SWAGGER_GATEWAY_SERVER_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-http-timeout', variable: 'HTTP_TIMEOUT'))
+                        creds.add(string(credentialsId: 'api-gateway-dev-http-max-redirects', variable: 'HTTP_MAX_REDIRECTS'))
                     } else if (env.DEPLOY_ENV == 'qa') {
                         creds.add(string(credentialsId: 'api-gateway-qa-port', variable: 'APP_PORT'))
                         creds.add(string(credentialsId: 'api-gateway-qa-db-host', variable: 'DB_HOST'))
@@ -125,6 +167,27 @@ pipeline {
                         creds.add(string(credentialsId: 'api-gateway-qa-secret-jwt', variable: 'SECRET_JWT'))
                         creds.add(string(credentialsId: 'api-gateway-qa-db-database', variable: 'DB_DATABASE'))
                         creds.add(string(credentialsId: 'api-gateway-qa-db-name', variable: 'DB_NAME'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-gateway-port', variable: 'GATEWAY_PORT'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-jwt-secret', variable: 'JWT_SECRET'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-jwt-expiration-time', variable: 'JWT_EXPIRATION_TIME'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-user-service-url', variable: 'USER_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-user-service-base-path', variable: 'USER_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-product-service-url', variable: 'PRODUCT_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-product-service-base-path', variable: 'PRODUCT_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-cart-service-url', variable: 'CART_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-cart-service-base-path', variable: 'CART_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-stock-service-url', variable: 'STOCK_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-stock-service-base-path', variable: 'STOCK_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-order-service-url', variable: 'ORDER_SERVICE_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-order-service-base-path', variable: 'ORDER_SERVICE_BASE_PATH'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-user-service-api-key', variable: 'USER_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-product-service-api-key', variable: 'PRODUCT_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-cart-service-api-key', variable: 'CART_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-stock-service-api-key', variable: 'STOCK_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-order-service-api-key', variable: 'ORDER_SERVICE_API_KEY'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-swagger-gateway-server-url', variable: 'SWAGGER_GATEWAY_SERVER_URL'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-http-timeout', variable: 'HTTP_TIMEOUT'))
+                        creds.add(string(credentialsId: 'api-gateway-qa-http-max-redirects', variable: 'HTTP_MAX_REDIRECTS'))
                     }
 
                     withCredentials(creds) {
@@ -145,6 +208,27 @@ pipeline {
                         SECRET_JWT=\$SECRET_JWT \
                         DB_DATABASE=\$DB_DATABASE \
                         DB_NAME=\$DB_NAME \
+                        GATEWAY_PORT=\$GATEWAY_PORT \
+                        JWT_SECRET=\$JWT_SECRET \
+                        JWT_EXPIRATION_TIME=\$JWT_EXPIRATION_TIME \
+                        USER_SERVICE_URL=\$USER_SERVICE_URL \
+                        USER_SERVICE_BASE_PATH=\$USER_SERVICE_BASE_PATH \
+                        PRODUCT_SERVICE_URL=\$PRODUCT_SERVICE_URL \
+                        PRODUCT_SERVICE_BASE_PATH=\$PRODUCT_SERVICE_BASE_PATH \
+                        CART_SERVICE_URL=\$CART_SERVICE_URL \
+                        CART_SERVICE_BASE_PATH=\$CART_SERVICE_BASE_PATH \
+                        STOCK_SERVICE_URL=\$STOCK_SERVICE_URL \
+                        STOCK_SERVICE_BASE_PATH=\$STOCK_SERVICE_BASE_PATH \
+                        ORDER_SERVICE_URL=\$ORDER_SERVICE_URL \
+                        ORDER_SERVICE_BASE_PATH=\$ORDER_SERVICE_BASE_PATH \
+                        USER_SERVICE_API_KEY=\$USER_SERVICE_API_KEY \
+                        PRODUCT_SERVICE_API_KEY=\$PRODUCT_SERVICE_API_KEY \
+                        CART_SERVICE_API_KEY=\$CART_SERVICE_API_KEY \
+                        STOCK_SERVICE_API_KEY=\$STOCK_SERVICE_API_KEY \
+                        ORDER_SERVICE_API_KEY=\$ORDER_SERVICE_API_KEY \
+                        SWAGGER_GATEWAY_SERVER_URL=\$SWAGGER_GATEWAY_SERVER_URL \
+                        HTTP_TIMEOUT=\$HTTP_TIMEOUT \
+                        HTTP_MAX_REDIRECTS=\$HTTP_MAX_REDIRECTS \
                         ./apps/api-gateway/deploy.sh
                         """
                     }
