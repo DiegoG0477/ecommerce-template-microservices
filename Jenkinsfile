@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         REPO_URL = 'https://github.com/DiegoG0477/ecommerce-template-microservices.git' // Assuming this is the monorepo URL
-        SSH_CRED_ID = 'ssh-key-ec2'
+        SSH_CRED_ID = 'ssh-key-gateway-ec2'
         EC2_USER = 'ubuntu'
         // Base remote path for the monorepo
         REMOTE_BASE_PATH = '/home/ubuntu/ecommerce-template-microservices'
